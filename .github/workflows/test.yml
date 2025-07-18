@@ -2,13 +2,13 @@ name: Test
 
 on:
   push:
-    branch:
+    branches:
       - main
   workflow_dispatch:
 
 jobs:
-   name: Test jobs
-   runs-on: ubuntu-latest
-   steps:
-     name: Log
-     run: echo "Test WF is successful"
+  Test_jobs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Log
+        run: echo "Test WF is successful"
