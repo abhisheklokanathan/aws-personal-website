@@ -26,7 +26,7 @@ jobs:
     
     - name: Checkout Code
       uses: actions/checkout@v3
-      
+
     - name: Terraform Init (Dev)
       run: terraform init
       working-directory: terraform
@@ -39,6 +39,12 @@ jobs:
       run: terraform plan
       working-directory: terraform
 
-    - name: Terraform Plan (Dev)
+    - name: Terraform apply (Dev)
       run: terraform apply -auto-approve      
       working-directory: terraform
+
+    - name: Sync latest changes
+      run: |
+        aws s3 cp index.html s3://aws-mypersonal-website/index.html
+        aws s3 cp image/profile.jpg s3://aws-mypersonal-website/image/profile.jpg --recursive
+        aws s3 cp styles/styles.css s3://aws-mypersonal-website/styles/styles.css --recursive
