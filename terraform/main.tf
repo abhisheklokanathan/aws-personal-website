@@ -9,9 +9,17 @@ resource "aws_s3_bucket_website_configuration" "static_website_config" {
     }
 }
 
+resource "aws_s3_account_public_access_block" "static_site_access" {
+    block_public_acls = false
+    block_public_policy = false
+    ignore_public_acls = false
+    restrict_public_buckets = false
+    
+}
+
 resource "aws_s3_bucket_policy" "static_site_policy" {
   bucket = aws_s3_bucket.source.id
-
+  
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
@@ -26,12 +34,4 @@ resource "aws_s3_bucket_policy" "static_site_policy" {
     ]
   })
   depends_on = [ aws_s3_account_public_access_block.static_site_access ]
-}
-
-resource "aws_s3_account_public_access_block" "static_site_access" {
-    block_public_acls = false
-    block_public_policy = false
-    ignore_public_acls = false
-    restrict_public_buckets = false
-    
 }
