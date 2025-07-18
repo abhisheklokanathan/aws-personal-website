@@ -13,7 +13,7 @@ resource "aws_s3_bucket_policy" "static_site_policy" {
     bucket = aws_s3_bucket.source.id
    policy = jsondecode({
             version = "2012-10-17"
-            statement = [
+            Statement = [
                 {
                     Effect = "Allow"
                     Principal = "*"
