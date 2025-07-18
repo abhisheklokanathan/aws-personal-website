@@ -46,5 +46,5 @@ jobs:
     - name: Sync latest changes
       run: |
         aws s3 cp index.html s3://aws-mypersonal-website/index.html
-        aws s3 cp image/profile.jpg s3://aws-mypersonal-website/image/profile.jpg --recursive
-        aws s3 cp styles/styles.css s3://aws-mypersonal-website/styles/styles.css --recursive
+        aws s3 cp image/ s3://aws-mypersonal-website/image/profile.jpg --recursive
+        aws s3 cp styles/ s3://aws-mypersonal-website/styles/styles.css --recursive
