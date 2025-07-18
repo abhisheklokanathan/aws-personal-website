@@ -1,4 +1,4 @@
-name: Test
+name: List S3 bucket
 
 on:
   push:
@@ -6,9 +6,18 @@ on:
       - main
   workflow_dispatch:
 
+permissions:
+  id-token: write
+  contents: read    
 jobs:
-  Test_jobs:
+  List_s3:
     runs-on: ubuntu-latest
     steps:
-      - name: Log
-        run: echo "Test WF is successful"
+    - name: AWS configure credentilas
+      uses: aws-actions/configure-aws-credentials@v4.1.0
+      with:
+        role-to-assume: arn:aws:iam::761018887005:role/github-personal-website-oidc
+        aws-region: ap-south-1
+
+    - name: AWS List bucket
+      run: aws s3 ls
