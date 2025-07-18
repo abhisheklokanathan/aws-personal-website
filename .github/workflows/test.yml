@@ -1,0 +1,14 @@
+name: Test
+
+on:
+  push:
+    branch:
+      - main
+  workflow_dispatch:
+
+jobs:
+   name: Test jobs
+   runs-on: ubuntu-latest
+   steps:
+     name: Log
+     run: echo "Test WF is successful"
