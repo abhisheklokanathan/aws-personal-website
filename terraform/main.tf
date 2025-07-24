@@ -4,7 +4,7 @@ resource "aws_s3_bucket" "source" {
 
 resource "aws_route53_zone" "public_zone" {
   name = var.aws_route53_zone
-  zone_id = aws_route53_zone.public_zone.zone_id
+  
 }
 
 resource "aws_s3_bucket_public_access_block" "static_site_access" {
