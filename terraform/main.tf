@@ -4,7 +4,7 @@ resource "aws_s3_bucket" "source" {
 
 resource "aws_route53_zone" "public_zone" {
   name = var.aws_route53_zone
-
+  zone_id = aws_route53_zone.public_zone.zone_id
 }
 
 resource "aws_s3_bucket_public_access_block" "static_site_access" {
@@ -32,7 +32,7 @@ resource "aws_acm_certificate" "studysite_cert" {
 
 data "aws_route53_zone" "domain_zone" {
   name = "studysite.shop"
-  depends_on = [ var.aws_route53_zone ]
+  depends_on = [ var.aws_route53_zone.public_zone ]
 }
 
 resource "aws_route53_record" "studysite_validation" {
