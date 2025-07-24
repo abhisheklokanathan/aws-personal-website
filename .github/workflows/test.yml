@@ -39,12 +39,12 @@ jobs:
       run: terraform plan
       working-directory: terraform
 
-    - name: Terraform apply (Dev)
-      run: terraform apply -auto-approve      
+    - name: Terraform destroy (Dev)
+      run: terraform destroy -auto-approve      
       working-directory: terraform
 
-    - name: Sync latest changes
-      run: |
-        aws s3 cp index.html s3://aws-mypersonal-website/index.html
-        aws s3 cp images/ s3://aws-mypersonal-website/images/ --recursive
-        aws s3 cp styles/ s3://aws-mypersonal-website/styles/ --recursive
+  #  - name: Sync latest changes
+  #    run: |
+   #     aws s3 cp index.html s3://aws-mypersonal-website/index.html
+   #     aws s3 cp images/ s3://aws-mypersonal-website/images/ --recursive
+   #     aws s3 cp styles/ s3://aws-mypersonal-website/styles/ --recursive
