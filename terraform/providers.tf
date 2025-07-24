@@ -5,6 +5,7 @@ terraform {
       version = "~> 6.0"
     }
   }
+  
   backend "s3" {
     bucket = "databucketfortfs3"
     key = "demo/terrafrom.tf.state"
@@ -17,5 +18,5 @@ terraform {
 
 # Configure the AWS Provider
 provider "aws" {
-  region = "us-east-1"
+  region = "ap-south-1"
 }
