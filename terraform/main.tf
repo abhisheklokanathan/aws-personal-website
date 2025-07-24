@@ -32,7 +32,7 @@ resource "aws_acm_certificate" "studysite_cert" {
 
 data "aws_route53_zone" "domain_zone" {
   name = "studysite.shop"
-  
+  depends_on = [ var.aws_route53_zone ]
 }
 
 resource "aws_route53_record" "studysite_validation" {
