@@ -44,7 +44,7 @@ resource "aws_route53_record" "studysite_validation" {
   records = each.value.key
   ttl = 60
   type = each.value.type
-  zone_id = data.aws_route53_zone.zone_id
+  zone_id = data.aws_route53_zone.domain_zone.zone_id
 
 }
 
