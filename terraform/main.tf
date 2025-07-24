@@ -2,6 +2,11 @@ resource "aws_s3_bucket" "source" {
     bucket = var.aws_s3_bucket 
 }
 
+resource "aws_route53_zone" "public_zone" {
+  name = var.aws_route53_zone
+
+}
+
 resource "aws_s3_bucket_public_access_block" "static_site_access" {
     bucket = aws_s3_bucket.source.id
     block_public_acls = true
@@ -23,6 +28,7 @@ resource "aws_acm_certificate" "studysite_cert" {
             create_before_destroy = true
           }
 }
+
 
 data "aws_route53_zone" "domain_zone" {
   name = "studysite.shop"
