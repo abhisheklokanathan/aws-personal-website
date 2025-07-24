@@ -50,6 +50,6 @@ resource "aws_route53_record" "studysite_validation" {
 
 resource "aws_acm_certificate_validation" "studysite_validation" {
   certificate_arn = aws_acm_certificate.studysite_cert.arn
-  validation_record_fqdns = [for record in aws_route53_record.studysite_validation.domain_validation_options : record.fqdn ]
+  validation_record_fqdns = [for record in aws_route53_record.studysite_validation : record.fqdn ]
   
 }
