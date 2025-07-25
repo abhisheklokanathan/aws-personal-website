@@ -61,8 +61,8 @@ resource "aws_acm_certificate_validation" "studysite_validation" {
 }
 
 resource "aws_cloudfront_origin_access_control" "oac" {
-  name                              = "oac${aws_s3_bucket.static_site.bucket}"
-  description                       = "OAC for ${aws_s3_bucket.static_site.bucket}"
+  name                              = "oac${aws_s3_bucket.source.bucket}"
+  description                       = "OAC for ${aws_s3_bucket.source.bucket}"
   origin_access_control_origin_type = "s3"
   signing_behavior                  = "always"
   signing_protocol                  = "sigv4"
@@ -73,12 +73,12 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   origin {
     domain_name              = aws_s3_bucket.source.bucket_regional_domain_name
     origin_access_control_id = aws_cloudfront_origin_access_control.oac.id
-    origin_id                = "S3-${aws_s3_bucket.static_site.bucket}"
+    origin_id                = "S3-${aws_s3_bucket.source.bucket}"
   }
 
   enabled             = true
   is_ipv6_enabled     = true
-  comment             = "Cloudfront distribution for -${aws_s3_bucket.static_site.bucket}"
+  comment             = "Cloudfront distribution for -${aws_s3_bucket.source.bucket}"
   default_root_object = "index.html"
 
   aliases = ["studysite.shop", "www.studysite.shop"]
@@ -86,7 +86,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   default_cache_behavior {
     allowed_methods  = ["GET", "HEAD"]
     cached_methods   = ["GET", "HEAD"]
-    target_origin_id = "S3-${aws_s3_bucket.static_site.bucket}"
+    target_origin_id = "S3-${aws_s3_bucket.source.bucket}"
 
     forwarded_values {
       query_string = false
@@ -130,7 +130,7 @@ resource "aws_s3_bucket_policy" "static_site_policy" {
           Service = "cloudfront.amazonaws.com"
         }
         Action = "s3.GetObject"
-        Resource = "${aws_s3_bucket.static_site.arn}/*"
+        Resource = "${aws_s3_bucket.source.arn}/*"
         Condition = {
           StingEquals = {
             "AWS:SourceArn" = aws_cloudfront_distribution.s3_distribution.arn
