@@ -143,7 +143,7 @@ resource "aws_s3_bucket_policy" "static_site_policy" {
 }
 
 resource "aws_route53_record" "studysite" {
-  zone_id = aws_route53_zone.domain_zone.zone_id
+  zone_id = data.aws_route53_zone.domain_zone
   name    = "studysite.com"
   type    = "A"
 
@@ -155,7 +155,7 @@ resource "aws_route53_record" "studysite" {
 }
 
 resource "aws_route53_record" "studysite_www" {
-  zone_id = aws_route53_zone.domain_zone.zone_id
+  zone_id = data.aws_route53_zone.domain_zone
   name    = "www.studysite.com"
   type    = "A"
 
