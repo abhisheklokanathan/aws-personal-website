@@ -122,7 +122,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
 resource "aws_s3_bucket_policy" "static_site_policy" {
   bucket = aws_s3_bucket.source.id
   policy = jsonencode({
-    Version = "2022-10-17"
+    Version = "2012-10-17"
     Statement = [
       {
         Effect = "Allow"
@@ -141,3 +141,4 @@ resource "aws_s3_bucket_policy" "static_site_policy" {
 })
   
 }
+
