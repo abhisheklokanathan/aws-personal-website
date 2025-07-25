@@ -121,6 +121,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
 
 resource "aws_s3_bucket_policy" "static_site_policy" {
   bucket = aws_s3_bucket.source.id
+
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
@@ -129,16 +130,15 @@ resource "aws_s3_bucket_policy" "static_site_policy" {
         Principal = {
           Service = "cloudfront.amazonaws.com"
         }
-        Action = "s3.GetObject"
+        Action = "s3:GetObject"
         Resource = "${aws_s3_bucket.source.arn}/*"
         Condition = {
-          StingEquals = {
+          StringEquals = {
             "AWS:SourceArn" = aws_cloudfront_distribution.s3_distribution.arn
           }
         }
       }
     ]
-})
-  
+  })
 }
 
