@@ -7,14 +7,16 @@ permissions:
   id-token: write
   contents: read    
 jobs:
-  Deploy_resources:
+  Destroy_resources:
     runs-on: ubuntu-latest
     steps:
     - name: AWS configure credentilas
       uses: aws-actions/configure-aws-credentials@v4.1.0
       with:
-        role-to-assume: arn:aws:iam::761018887005:role/github-personal-website-oidc
+        role-to-assume: $IAM_ROLE
         aws-region: ap-south-1
+      env:
+        IAM_ROLE: ${{ secrets.IAM_ROLE }}
 
     - name: Sync latest changes
       run: |
