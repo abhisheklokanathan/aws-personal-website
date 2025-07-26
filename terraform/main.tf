@@ -1,4 +1,4 @@
-resource "aws_s3_bucket" "source_east" {
+resource "aws_s3_bucket" "source" {
     bucket = var.aws_s31_bucket
     provider = aws.east
 }
