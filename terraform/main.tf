@@ -16,6 +16,7 @@ resource "aws_route53_zone" "public_zone" {
 }
 
 resource "aws_s3_bucket_public_access_block" "static_site_access" {
+    provider = aws.east
     bucket = aws_s3_bucket.source.id
     block_public_acls = true
     block_public_policy = true
@@ -131,6 +132,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
 }
 
 resource "aws_s3_bucket_policy" "static_site_policy" {
+  provider = aws.east
   bucket = aws_s3_bucket.source.id
 
   policy = jsonencode({
