@@ -16,10 +16,8 @@ jobs:
     - name: AWS configure credentilas
       uses: aws-actions/configure-aws-credentials@v4.1.0
       with:
-        role-to-assume: $IAM_ROLE
+        role-to-assume: ${{ secrets.IAM_ROLE }}
         aws-region: ap-south-1
-      env:
-        IAM_ROLE: ${{ secrets.IAM_ROLE }}
 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v2
