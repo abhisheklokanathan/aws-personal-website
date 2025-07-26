@@ -1,11 +1,13 @@
 resource "aws_s3_bucket" "source" {
     bucket = var.aws_s31_bucket
     provider = aws.east
+    force_destroy = true
 }
 
 resource "aws_s3_bucket" "source_south" {
     bucket = var.aws_s32_bucket
     provider = aws.south
+    force_destroy = true
 }
 
 resource "aws_route53_zone" "public_zone" {
