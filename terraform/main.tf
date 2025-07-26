@@ -4,7 +4,7 @@ resource "aws_s3_bucket" "source_south" {
 }
 
 resource "aws_s3_bucket" "source_east" {
-    bucket = var.aws_s32_bucket
+    bucket = var.aws_s31_bucket
     provider = aws.east
 }
 
