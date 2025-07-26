@@ -1,8 +1,10 @@
-variable "aws_s3_bucket" {
+variable "aws_s31_bucket" {
     type = string
-    default = "aws-mypersonal-website"
 }
 
+variable "aws_s32_bucket" {
+    type = string
+}
 variable "aws_route53_zone" {
     type = string
     default = "studysite.shop"
